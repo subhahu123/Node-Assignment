@@ -10,7 +10,7 @@
 
 <body>
 
-    <form action="http://localhost:3000/person" method="post">
+    <form action="http://localhost:8080/person" method="post">
         <div>
             <label for="user">name</label>
             <input name="name" id="name" value="Hi">
@@ -32,9 +32,18 @@
             <input name="address" id="address" value="Mom">
         </div>
         <div>
-            <label for="interests">interests</label>
-            <input name="interests" id="interests" value="Mom">
+            <label for="interests">interests : </label>
+
+            <input type="checkbox" name="interests[]" value="counter strike" id="counter strike">
+            <label for="counter strike">counter strike</label>
+
+            <input type="checkbox" name="interests[]" value="coding" id="coding">
+            <label for="coding">coding</label>
+
+            <input type="checkbox" name="interests[]" value="football" id="football">
+            <label for="football">football</label>
         </div>
+
         <div>
             <button>Send my greetings</button>
         </div>

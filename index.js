@@ -69,10 +69,22 @@ app.get("/user/interests/:interest", async (request, response) => {
         response.status(500).send(error);
     }
 });
-app.post("/user/:id", async (request, response) => {
+app.post("/userupdate/comments/:id", async (request, response) => {
     try {
         console.log(request.body.comment)
         var person = await userModel.findByIdAndUpdate(request.params.id, { $push: { comment: request.body.comment[0] } } ).exec();
+        var result = await person.save(done);
+        console.log(request.body);
+        console.log(result) ;
+        response.send(result);
+    } catch (error) {
+        response.status(500).send(error);
+    }
+});
+app.post("/user/edit/:id", async (request, response) => {
+    try {
+        console.log(request.body.comment)
+        var person = await userModel.findByIdAndUpdate(request.params.id, { $set: request.body } ).exec();
         var result = await person.save(done);
         console.log(request.body);
         console.log(result) ;

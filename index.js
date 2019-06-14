@@ -51,6 +51,14 @@ app.get("/user/:id", async (request, response) => {
         response.status(500).send(error);
     }
 });
+app.get("/comments/:id", async (request, response) => {
+    try {
+        var person = await userModel.findById(request.params.id).exec();
+        response.send(person.comment);
+    } catch (error) {
+        response.status(500).send(error);
+    }
+});
 app.get("/user/interests/:interest", async (request, response) => {
     try {
         var person = await userModel.find( { interests: request.params.interest  }).exec();

@@ -24,7 +24,7 @@ const userModel = Mongoose.model("person", userSchema);
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 
-app.post("/person", async (request, response) => {
+app.post("/user", async (request, response) => {
     try {
         var person = new userModel(request.body);
         var dd = request.body ;
@@ -35,7 +35,7 @@ app.post("/person", async (request, response) => {
         response.status(500).send(error);
     }
 });
-app.get("/people", async (request, response) => {
+app.get("/users", async (request, response) => {
     try {
         var result = await userModel.find().exec();
         response.send(result);
@@ -43,7 +43,7 @@ app.get("/people", async (request, response) => {
         response.status(500).send(error);
     }
 });
-app.get("/person/:id", async (request, response) => {
+app.get("/user/:id", async (request, response) => {
     try {
         var person = await userModel.findById(request.params.id).exec();
         response.send(person);
@@ -51,7 +51,17 @@ app.get("/person/:id", async (request, response) => {
         response.status(500).send(error);
     }
 });
-app.put("/person/:id", async (request, response) => {
+app.get("/user/interests/:interest", async (request, response) => {
+    try {
+        var person = await userModel.find( { interests: request.params.interest  }).exec();
+        console.log(request.params.interest)
+        console.log(person) ;
+        response.send(person);
+    } catch (error) {
+        response.status(500).send(error);
+    }
+});
+app.put("/user/:id", async (request, response) => {
     try {
         var person = await userModel.findById(request.params.id).exec();
         person.set(request.body);
@@ -61,7 +71,7 @@ app.put("/person/:id", async (request, response) => {
         response.status(500).send(error);
     }
 });
-app.delete("/person/:id", async (request, response) => {
+app.delete("/user/:id", async (request, response) => {
     try {
         var result = await userModel.deleteOne({ _id: request.params.id }).exec();
         response.send(result);

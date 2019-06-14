@@ -12,10 +12,10 @@ var userSchema = new Mongoose.Schema({
     phone_number: String,
     designation: String,
     address: String,
-    comment: [{
+    comment: { type: [{
         id: String,
         message: String
-    }],
+    }] },
     interests: { type: [String], required: true }
 });
 

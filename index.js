@@ -4,12 +4,22 @@ const BodyParser = require("body-parser");
 
 var app = Express();
 
-Mongoose.connect("mongodb://zypher:subhahu123@ds337377.mlab.com:37377/user") ;
+Mongoose.connect("mongodb://zypher:subhahu123@ds337377.mlab.com:37377/user", {useNewUrlParser: true}) ;
 
-const PersonModel = Mongoose.model("person", {
-    firstname: String,
-    lastname: String
+var userSchema = new Schema({
+    name: String,
+    email: String,
+    phone_number: String,
+    designation: String,
+    address: String,
+    comment: [{
+        id: String,
+        message: String
+    }],
+    interests: { type: [String], required: true }
 });
+
+const PersonModel = Mongoose.model("person", userSchema);
 
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));

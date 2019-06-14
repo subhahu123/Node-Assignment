@@ -69,11 +69,13 @@ app.get("/user/interests/:interest", async (request, response) => {
         response.status(500).send(error);
     }
 });
-app.put("/user/:id", async (request, response) => {
+app.post("/user/:id", async (request, response) => {
     try {
-        var person = await userModel.findById(request.params.id).exec();
-        person.set(request.body);
-        var result = await person.save();
+        console.log(request.body.comment)
+        var person = await userModel.findByIdAndUpdate(request.params.id, { $push: { comment: request.body.comment[0] } } ).exec();
+        var result = await person.save(done);
+        console.log(request.body);
+        console.log(result) ;
         response.send(result);
     } catch (error) {
         response.status(500).send(error);

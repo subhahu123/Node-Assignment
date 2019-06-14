@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>put or update data</title>
+</head>
+
+<body>
+
+    <form action="http://localhost:8080/user/5d03a967a8546f159047d316" method="POST">
+        <div>
+            <label for="id">id</label>
+            <input name="comment[][id]" id="id" value="Hi">
+        </div>
+        <div>
+            <label for="message">message</label>
+            <input name="comment[][message]" id="message" value="Hi">
+        </div>
+        <div>
+            <button>Send my greetings</button>
+        </div>
+    </form>
+
+
+</body>
+
+</html>
